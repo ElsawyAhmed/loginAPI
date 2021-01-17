@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <link href="login.css" rel="stylesheet" type="text/css">
+        
+
+    </head>
+    <body>
+        <div class="login-page">
+            <div class="form">
+                <input type="text" placeholder="username" id="name"  />
+                <input type="password" placeholder="password" id="pass" />
+                <button onclick="authenticate();">login</button>
+            </div>
+            
+            <h3 id="msg" style="color:aqua"></h3>
+
+        </div>
+        <script>
+            function authenticate() {
+                // i have tried to get input but not working fine 
+              /*  var username = document.getElementById("name").value;
+                var password = document.getElementById("pass").value;
+                var usermail, passwd;
+                var user = { usermail, passwd };
+                user[usermail] = username;
+                user[passwd] = password;
+                console.log(user);*/
+
+                fetch('https://reqres.in/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "email": "eve.holt@reqres.in",   // in Case Changing this user get the fai message
+                        "password": "cityslicka2"
+                    })
+                })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        
+                        console.log(data)
+                        if (data.token) {
+                            alert("Successful Login");
+                        }
+                        else {
+                            alert("Failed To Login Wrong User")
+                        }
+                    });
+                
+            }
+            
+
+        </script>
+    </body>
+</html>
